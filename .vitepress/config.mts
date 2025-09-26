@@ -26,7 +26,7 @@ export default defineConfig({
     themeConfig: {
         nav: nav(),
         sidebar: {
-            '/example/': sidebarExample()
+            '/requirement-analysis/': sidebarRequirements()
         },
         // Logo in the upper left corner of the homepage
         logo: {src: '/Spring.svg', width: 24, height: 24},
@@ -42,12 +42,15 @@ export default defineConfig({
 function nav(): DefaultTheme.NavItem[] {
     return [
         {text: 'Home', link: '/'},
-        {text: 'Example', link: '/example/'},
+        {text: 'Requirements', link: '/requirement-analysis/'},
     ];
 }
 
-function sidebarExample(): DefaultTheme.SidebarItem[] {
+function sidebarRequirements(): DefaultTheme.SidebarItem[] {
     return [
-       {text: 'Examples', link: '/example/index.md'},
+        {
+            text: 'Requirements Specification',
+            link: '/requirement-analysis/requirements-specification.md'
+        },
     ]
 }
