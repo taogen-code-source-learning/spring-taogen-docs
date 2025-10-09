@@ -26,7 +26,8 @@ export default defineConfig({
     themeConfig: {
         nav: nav(),
         sidebar: {
-            '/requirement-analysis/': sidebarRequirements()
+            '/requirement-analysis/': sidebarRequirements(),
+            '/software-design/': sidebarSoftwareDesign(),
         },
         // Logo in the upper left corner of the homepage
         logo: {src: '/Spring.svg', width: 24, height: 24},
@@ -43,6 +44,7 @@ function nav(): DefaultTheme.NavItem[] {
     return [
         {text: 'Home', link: '/'},
         {text: 'Requirements', link: '/requirement-analysis/'},
+        {text: 'Software Design', link: '/software-design/'}
     ];
 }
 
@@ -51,6 +53,33 @@ function sidebarRequirements(): DefaultTheme.SidebarItem[] {
         {
             text: 'Requirements Specification',
             link: '/requirement-analysis/requirements-specification.md'
+        },
+    ]
+}
+
+function sidebarSoftwareDesign(): DefaultTheme.SidebarItem[] {
+    return [
+        {
+            text: 'Spring Framework',
+            items: [
+                {
+                    text: 'Spring Framework Note',
+                    link: '/software-design/spring-framework/spring-framework-note.md'
+                },
+                {
+                    text: 'Spring Framework Analysis',
+                    link: '/software-design/spring-framework/spring-framework-analysis.md'
+                }
+            ]
+        },
+        {
+            text: 'Detailed Design',
+            items: [
+                {
+                    text: 'Detailed Design',
+                    link: '/software-design/detailed-design/detailed-design.md'
+                }
+            ]
         },
     ]
 }
