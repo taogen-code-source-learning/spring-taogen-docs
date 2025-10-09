@@ -10,7 +10,19 @@ spring-taogen 是 Spring Framework 的简易版本，实现 Spring Framework 重
 
 ### Product Functions
 
-![spring-taogen.png](../public/requirement-analysis/spring-taogen.png)
+![spring-taogen.png](/requirement-analysis/spring-taogen.png)
+
+- Core
+  - IoC Container
+  - AOP
+  - ~~Data Handling~~ (Planned. Do it in the future.)
+- Data Access
+  - Transaction management
+  - DAO support
+  - Data Access with JDBC
+  - ORM Data Access
+- Web
+  - Spring MVC
 
 ## Requirements
 
