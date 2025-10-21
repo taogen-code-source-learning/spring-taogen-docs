@@ -1,8 +1,40 @@
+<script setup>
+import ImageViewer from '../../components/ImageViewer.vue';
+</script>
+
 # Spring Framework Analysis
 
 ## IoC 
 
-### Spring Framework's IoC class analysis
+### Class diagrams
+
+#### BeanFactory
+
+BeanFactory class diagram without members
+
+<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__without-members.png']" />
+
+BeanFactory class diagram with members
+
+<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory.png']" />
+
+BeanFactory class diagram with field and dependencies
+
+<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__with-fields__with-dependencies.png']" />
+
+#### BeanDefinitionReader
+
+BeanDefinitionReader class diagram without members
+
+<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__without-members.png']" />
+
+BeanDefinitionReader class diagram with members
+
+<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__with-fields__with-methods.png']" />
+
+
+### Class analysis
+
 
 #### BeanFactory and ApplicationContext
 
