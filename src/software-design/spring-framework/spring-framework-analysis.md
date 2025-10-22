@@ -10,27 +10,53 @@ import ImageViewer from '../../components/ImageViewer.vue';
 
 #### BeanFactory
 
-BeanFactory class diagram without members
+Classes
 
-<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__without-members.png']" />
+<ImageViewer :images="['../../public/software-design/BeanFactory/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__without-members.png']" />
 
-BeanFactory class diagram with members
+Fields and methods
 
-<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory.png']" />
+<ImageViewer :images="['../../public/software-design/BeanFactory/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory.png']" />
 
-BeanFactory class diagram with field and dependencies
+Dependencies
 
-<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__with-fields__with-dependencies.png']" />
+<ImageViewer :images="['../../public/software-design/BeanFactory/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__with-fields__with-dependencies.png']" />
 
 #### BeanDefinitionReader
 
-BeanDefinitionReader class diagram without members
+Classes
 
-<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__without-members.png']" />
+<ImageViewer :images="['../../public/software-design/BeanDefinitionReader/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__without-members.png']" />
 
-BeanDefinitionReader class diagram with members
+Fields and methods
 
-<ImageViewer :images="['../../public/software-design/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__with-fields__with-methods.png']" />
+<ImageViewer :images="['../../public/software-design/BeanDefinitionReader/classDiagram-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__with-fields__with-methods.png']" />
+
+Dependencies
+
+<ImageViewer :images="['../../public/software-design/BeanDefinitionReader/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__with-fields__with-dependencies.png']" />
+
+
+#### ResourceLoader
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/ResourceLoader/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.ResourceLoader.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/ResourceLoader/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.ResourceLoader__with-fields__with-methods.png']" />
+
+
+#### Resource
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/Resource/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.Resource.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/Resource/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.Resource__with-fields__with-methods.png']" />
 
 
 ### Class analysis
