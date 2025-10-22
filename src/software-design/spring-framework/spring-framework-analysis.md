@@ -143,3 +143,70 @@ GenericApplicationContext ctx = new AnnotationConfigApplicationContext(configura
 MyBean myBean = ctx.getBean(MyBean.class);
 myBean.sayHello();
 ```
+
+#### BeanDefinitionReader
+
+- BeanDefinitionReader: 1) Simple interface for bean definition readers. Specifies load methods with Resource and String location parameters. 2) Concrete bean definition readers can of course add additional load and register methods for bean definitions, specific to their bean definition format. **Methods**: `getRegistry()`, `getResourceLoader()`, `getBeanClassLoader()`, `getBeanNameGenerator()`, `loadBeanDefinitions(xxx)`
+  - AbstractBeanDefinitionReader
+    - PropertiesBeanDefinitionReader
+    - GroovyBeanDefinitionReader
+    - XmlBeanDefinitionReader
+
+### Algorithm Implementation Analysis
+
+#### Process
+
+- new GenericXmlApplicationContext(String... resourceLocations)
+  - load(resourceLocations);
+    - XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this)
+      - ResourceLoader resourceLoader = getResourceLoader();
+        - new PathMatchingResourcePatternResolver() or this.resourceLoader = genericXmlApplicationContext;
+        - PathMatchingResourcePatternResolver.getResources(String locationPattern)
+    - new BeanDefinitionDocumentReader()
+    - new XmlReaderContext()
+    - new BeanDefinitionParserDelegate()
+    - parse: BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele); 
+    - register: BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
+      - registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
+  - refresh();
+    - `DefaultListableBeanFactory`. `preInstantiateSingletons()`
+      - `List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);`
+      - RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+      - getBean(beanName);
+      - TODO
+
+Load process
+
+1. Convert file paths to Resource objects
+2. Parse XML element to BeanDefinition objects
+3. Register BeanDefinition objects to BeanDefinitionRegistry
+
+Refresh process
+
+---
+
+
+- Scan files
+  - Scan class files
+  - Scan XML files
+- Parse class files and get class metadata
+- Convert metadata to beanDefinitions
+- Register beanDefinitions in the beanFactory
+- Initialize beans
+
+Process
+
+- Phrase 1: Load and register all classes' beanDefinitions
+- Phrase 2: Check beanDefinitions and filter Spring component bean
+- Phrase 3: Instantiate all bean
+
+#### ResourceLoader: Convert file path to Resource
+
+
+
+#### ClassReader: Parse the classFile content and call classVisitor
+
+#### ClassVisitor: To get class metadata by converting classFile content
+
+#### TypeFilter: check if the class is a Spring component
+
