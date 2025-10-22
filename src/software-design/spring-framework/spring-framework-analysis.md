@@ -177,9 +177,9 @@ myBean.sayHello();
 
 Load process
 
-1. Convert file paths to Resource objects
-2. Parse XML element to BeanDefinition objects
-3. Register BeanDefinition objects to BeanDefinitionRegistry
+1. Convert file paths to Resource objects. (BeanDefinitionReader, ResourceLoader)
+2. Parse XML element to BeanDefinition objects (BeanDefinitionReader, BeanDefinitionDocumentReader, XmlReaderContext, BeanDefinitionParserDelegate, BeanDefinitionHolder)
+3. Register BeanDefinition objects to BeanDefinitionRegistry (BeanDefinitionReaderUtils)
 
 Refresh process
 
