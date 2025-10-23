@@ -8,7 +8,9 @@ import ImageViewer from '../../components/ImageViewer.vue';
 
 ### Class diagrams
 
-#### BeanFactory
+#### Load
+
+##### BeanFactory
 
 Classes
 
@@ -22,7 +24,7 @@ Dependencies
 
 <ImageViewer :images="['../../public/software-design/BeanFactory/classDiagram-org-springframework-org.springframework.beans.factory.BeanFactory__with-fields__with-dependencies.png']" />
 
-#### BeanDefinitionReader
+##### BeanDefinitionReader
 
 Classes
 
@@ -37,7 +39,7 @@ Dependencies
 <ImageViewer :images="['../../public/software-design/BeanDefinitionReader/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.support.BeanDefinitionReader__with-fields__with-dependencies.png']" />
 
 
-#### ResourceLoader
+##### ResourceLoader
 
 Classes
 
@@ -48,7 +50,7 @@ Fields and methods
 <ImageViewer :images="['../../public/software-design/ResourceLoader/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.ResourceLoader__with-fields__with-methods.png']" />
 
 
-#### Resource
+##### Resource
 
 Classes
 
@@ -58,6 +60,38 @@ Fields and methods
 
 <ImageViewer :images="['../../public/software-design/Resource/classDiagram-v6.1.x-org-springframework-org.springframework.core.io.Resource__with-fields__with-methods.png']" />
 
+##### BeanDefinition
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/BeanDefinition/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.config.BeanDefinition.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/BeanDefinition/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.config.BeanDefinition__with-fields__with-methods.png']" />
+
+##### BeanMetadataElement and BeanDefinitionHolder
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/BeanMetadataElement/classDiagram-v6.1.x-org-springframework-org.springframework.beans.BeanMetadataElement.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/BeanMetadataElement/classDiagram-v6.1.x-org-springframework-org.springframework.beans.BeanMetadataElement__with-fields__with-methods.png']" />
+
+
+#### Refresh
+
+##### InstantiationStrategy
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/InstantiationStrategy/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.support.InstantiationStrategy.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/InstantiationStrategy/classDiagram-v6.1.x-org-springframework-org.springframework.beans.factory.support.InstantiationStrategy__with-fields__with-methods.png']" />
 
 ### Class analysis
 
@@ -156,6 +190,8 @@ myBean.sayHello();
 
 #### Process
 
+##### GenericXmlApplicationContext
+
 - new GenericXmlApplicationContext(String... resourceLocations)
   - load(resourceLocations);
     - XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(this)
@@ -169,21 +205,39 @@ myBean.sayHello();
     - register: BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
       - registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
   - refresh();
-    - `DefaultListableBeanFactory`. `preInstantiateSingletons()`
-      - `List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);`
-      - RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
-      - getBean(beanName);
-      - TODO
+    - finishBeanFactoryInitialization(beanFactory)
+      - DefaultListableBeanFactory 
+        - `preInstantiateSingletons()`
+        - `List<String> beanNames = new ArrayList<>(this.beanDefinitionNames);`
+        - RootBeanDefinition bd = getMergedLocalBeanDefinition(beanName);
+        - getBean(beanName);
+        - doGetBean()
+        - SingletonBeanRegistry
+          - getSingleton(String beanName, ObjectFactory<?> singletonFactory)
+        - createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
+        - doCreateBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
+        - createBeanInstance(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
+        - instantiateBean(String beanName, RootBeanDefinition mbd)
+        - SimpleInstantiationStrategy
+          - instantiate(RootBeanDefinition bd, @Nullable String beanName, BeanFactory owner)
+          - BeanUtils.instantiateClass(constructorToUse)
+          - Constructor.newInstance(argsWithDefaultValues)
 
-Load process
+**The Load process**
 
 1. Convert file paths to Resource objects. (BeanDefinitionReader, ResourceLoader)
 2. Parse XML element to BeanDefinition objects (BeanDefinitionReader, BeanDefinitionDocumentReader, XmlReaderContext, BeanDefinitionParserDelegate, BeanDefinitionHolder)
 3. Register BeanDefinition objects to BeanDefinitionRegistry (BeanDefinitionReaderUtils)
 
-Refresh process
+**The Refresh process**
 
----
+1. Traverse beanDefinitions (BeanFactory)
+2. Merge parent beanDefinition (BeanFactory)
+3. Traverse and create dependent beans (BeanFactory)
+4. Create bean instance (InstantiationStrategy, BeanUtils)
+
+
+##### AnnotationConfigApplicationContext
 
 
 - Scan files
