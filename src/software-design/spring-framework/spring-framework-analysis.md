@@ -80,6 +80,48 @@ Fields and methods
 
 <ImageViewer :images="['../../public/software-design/BeanMetadataElement/classDiagram-v6.1.x-org-springframework-org.springframework.beans.BeanMetadataElement__with-fields__with-methods.png']" />
 
+#### scan
+
+##### ResourceLoaderAware and ClassPathBeanDefinitionScanner
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/ResourceLoaderAware/classDiagram-v6.1.x-org-springframework-org.springframework.context.ResourceLoaderAware.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/ResourceLoaderAware/classDiagram-v6.1.x-org-springframework-org.springframework.context.ResourceLoaderAware__with-fields__with-methods.png']" />
+
+##### ClassVisitor
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/ClassVisitor/classDiagram-v6.1.x-org-springframework-org.springframework.asm.ClassVisitor.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/ClassVisitor/classDiagram-v6.1.x-org-springframework-org.springframework.asm.ClassVisitor__with-fields__with-methods.png']" />
+
+##### ClassReader
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/ClassReader/classDiagram-v6.1.x-org-springframework-org.springframework.asm.ClassReader__with-fields__with-methods.png']" />
+
+
+##### MetadataReader
+
+<ImageViewer :images="['../../public/software-design/MetadataReader/classDiagram-v6.1.x-org-springframework-org.springframework.core.type.classreading.MetadataReader__with-fields__with-methods.png']" />
+
+##### ClassMetadata
+
+Classes
+
+<ImageViewer :images="['../../public/software-design/ClassMetadata/classDiagram-v6.1.x-org-springframework-org.springframework.core.type.ClassMetadata.png']" />
+
+Fields and methods
+
+<ImageViewer :images="['../../public/software-design/ClassMetadata/classDiagram-v6.1.x-org-springframework-org.springframework.core.type.ClassMetadata__with-fields__with-methods.png']" />
 
 #### Refresh
 
@@ -239,6 +281,25 @@ myBean.sayHello();
 
 ##### AnnotationConfigApplicationContext
 
+- new AnnotationConfigApplicationContext(basePackage)
+  - this();
+    - this.reader = new AnnotatedBeanDefinitionReader(this)
+    - this.scanner = new ClassPathBeanDefinitionScanner(this)
+  - scan(basePackages);
+    - ClassPathBeanDefinitionScanner
+      - scan(String... basePackages)
+      - scanCandidateComponents(String basePackage)
+      - getResourcePatternResolver()
+      - getResources(packageSearchPath)
+      - Parse: MetadataReader metadataReader = getMetadataReader(resource)
+        - ClassVisitor and ClassReader
+      - isCandidateComponent(metadataReader)
+      - ScannedGenericBeanDefinition sbd = new ScannedGenericBeanDefinition(metadataReader);
+      - registerBeanDefinition(definitionHolder, this.registry)
+  - refresh();
+    - (Same as GenericXmlApplicationContext)
+
+---
 
 - Scan files
   - Scan class files
